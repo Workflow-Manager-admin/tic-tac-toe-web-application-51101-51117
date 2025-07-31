@@ -1,104 +1,203 @@
-/* CSS Variables for Theme Management */
+/* Theme & color variables */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  /* Provided scheme */
+  --primary: #1976d2;
+  --secondary: #424242;
+  --accent: #ff4081;
+
+  /* Light theme backgrounds/text */
+  --bg-primary: #fff;
+  --bg-secondary: #f7f7fa;
+  --text-primary: #222;
+  --text-secondary: var(--secondary);
+
+  --board-border: #e0e0e0;
+  --board-shadow: 0 4px 24px rgba(60,72,120,.09);
+
+  --square-border: #cad3df;
+  --square-bg: #fff;
+  --square-hover: #f4f7fc;
+  --restart-bg: var(--primary);
+  --restart-bg-hover: #1561a4;
+  --status-bg: #f8faff;
+
+  /* Misc */
+  --footer-bg: #fbfbfd;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+body {
+  background: var(--bg-primary);
 }
 
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
   color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.ttt-main {
+  margin: auto;
+  max-width: 340px;
+  min-width: 270px;
+  background: var(--bg-secondary);
+  border-radius: 18px;
+  box-shadow: var(--board-shadow);
+  padding: 2.3rem 1.6rem 1.7rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.ttt-title {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -2px;
+  margin-bottom: 1.4rem;
+  color: var(--primary);
+  text-shadow: 0px 2px 8px rgba(25,118,210,.09);
+}
+
+.ttt-status {
+  background: var(--status-bg);
+  padding: 0.7rem 1.2rem;
+  border-radius: 9px;
+  font-size: 1.16rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-bottom: 1.1rem;
+  color: var(--secondary);
+  min-width: 180px;
+  min-height: 2em;
+  box-shadow: 0 2px 10px 0 rgba(68,68,68,.03);
+  text-align: center;
+}
+
+.ttt-board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-primary);
+  border-radius: 13px;
+  border: 2px solid var(--board-border);
+  box-shadow: var(--board-shadow);
+  margin-bottom: 1.6rem;
+}
+
+.ttt-board-row {
+  display: flex;
+}
+
+/* Square styles */
+.ttt-square {
+  width: 68px;
+  height: 68px;
+  margin: 6px;
+  padding: 0;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--square-bg);
+  border: 2px solid var(--square-border);
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px 0 rgba(170,180,210,.06);
+  transition: background 0.14s, border-color 0.18s, color 0.19s;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
+  user-select: none;
   position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.ttt-square:focus {
+  border-color: var(--accent);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.ttt-square.filled {
+  cursor: default;
+  background: #fafafd;
+}
+
+.ttt-square:hover:not(.filled) {
+  background: var(--square-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.ttt-restart-btn {
+  background: var(--restart-bg);
+  color: #fff;
+  padding: 0.78rem 2.6rem;
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+  border-radius: 26px;
+  font-size: 1.09rem;
   font-weight: 600;
+  letter-spacing: .06em;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 16px 0 rgba(25, 118, 210, .09);
+  margin-top: 1.0rem;
+  margin-bottom: 0.1rem;
+  transition: background 0.18s, box-shadow 0.25s;
+  outline: none;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.ttt-restart-btn:hover {
+  background: var(--restart-bg-hover);
+  box-shadow: 0 7px 18px 0 rgba(25, 118, 210, .16);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.ttt-footer {
+  background: var(--footer-bg);
+  color: var(--secondary);
+  font-size: .96rem;
+  margin-top: auto;
+  margin-bottom: 0;
+  text-align: center;
+  padding: 1.2rem 0 0.1rem 0;
+  font-weight: 400;
+  letter-spacing: .04em;
+  border-top: 1px solid #ebebef;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive adjustments */
+@media (max-width: 550px) {
+  .ttt-main {
+    padding: 1.1rem 2vw 1.7rem 2vw;
+    margin-top: 2vw;
+    margin-bottom: 3vw;
+    max-width: 98vw;
+    min-width: 0;
   }
-  to {
-    transform: rotate(360deg);
+  .ttt-title {
+    font-size: 2rem;
+  }
+  .ttt-board-row .ttt-square {
+    width: 20vw;
+    height: 20vw;
+    font-size: 2.1rem;
+    margin: 2vw;
+    min-width: 36px;
+    min-height: 36px;
+    max-width: 86px;
+    max-height: 86px;
+  }
+  .ttt-board {
+    padding: 0;
   }
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+/* Accessibility focus ring */
+.ttt-square:focus-visible, .ttt-restart-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 1px;
 }
